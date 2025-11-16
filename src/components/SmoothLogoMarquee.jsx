@@ -5,9 +5,10 @@ const brandLogos = [
   { name: 'Facebook', url: 'https://cdn.simpleicons.org/facebook/20b2aa' },
   { name: 'Instagram', url: 'https://cdn.simpleicons.org/instagram/ffffff' },
   { name: 'TikTok', url: 'https://cdn.simpleicons.org/tiktok/ffffff' },
-  { name: 'Google', url: 'https://cdn.simpleicons.org/google/ffffff' },
+  { name: 'Google Ads', url: 'https://cdn.simpleicons.org/google/ffffff' },
   { name: 'YouTube', url: 'https://cdn.simpleicons.org/youtube/ff3131' },
-  { name: 'LinkedIn', url: 'https://cdn.simpleicons.org/linkedin/0A66C2' },
+  // Use white variant to avoid color-related fetch/caching issues
+  { name: 'LinkedIn', url: 'https://cdn.simpleicons.org/linkedin/ffffff' },
 ];
 
 function Row({ reverse = false, speed = 40 }) {
@@ -45,6 +46,15 @@ function Row({ reverse = false, speed = 40 }) {
               height={28}
               className="opacity-90 drop-shadow-[0_0_8px_rgba(32,178,170,0.35)]"
               loading="lazy"
+              referrerPolicy="no-referrer"
+              crossOrigin="anonymous"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.dataset.fallback !== '1' && logo.name === 'LinkedIn') {
+                  target.dataset.fallback = '1';
+                  target.src = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png';
+                }
+              }}
             />
             <span className="text-sm text-white/80">{logo.name}</span>
           </div>
