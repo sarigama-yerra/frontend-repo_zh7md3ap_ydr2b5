@@ -1,6 +1,7 @@
 import Spline from '@splinetool/react-spline';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
+import FloatingLogos from './FloatingLogos';
 
 const Hero = () => {
   const whatsapp = 'https://wa.me/213540035753?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services';
@@ -16,7 +17,11 @@ const Hero = () => {
         <Spline scene="https://prod.spline.design/FduaNp3csZktbOi3/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
+      {/* Dim overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-[#0b0e12]" />
+
+      {/* Floating logos layer */}
+      <FloatingLogos />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-28 pb-16">
         <motion.div
@@ -36,7 +41,7 @@ const Hero = () => {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/70">
-            {['Facebook','Instagram','TikTok','Google Ads','LinkedIn'].map((p) => (
+            {['Facebook','Instagram','TikTok','Google Ads','LinkedIn','YouTube'].map((p) => (
               <span key={p} className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{p}</span>
             ))}
           </div>
