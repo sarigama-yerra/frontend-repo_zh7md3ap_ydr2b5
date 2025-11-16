@@ -2,21 +2,41 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
-const DEFAULT_PACKS = [
+const FALLBACK_PACKS = [
   {
     platform: 'Facebook & Instagram',
-    logo: '',
-    name: 'PACK STARTER',
-    price_DA: '',
-    duration: '',
-    results: ['vues', 'engagement', 'leads'],
-    advantages: [],
-    objective: '',
+    logo: 'https://cdn.simpleicons.org/meta/ffffff',
+    name: 'Pack Starter',
+    price_DA: '15,000 DA',
+    duration: '7 jours',
+    results: ['+5k vues', '+300 clics', '+50 leads'],
+    advantages: ['Ciblage basique', 'Créa 1 visuel'],
+    objective: 'Trafic',
+  },
+  {
+    platform: 'Facebook & Instagram',
+    logo: 'https://cdn.simpleicons.org/meta/ffffff',
+    name: 'Pack Boost',
+    price_DA: '30,000 DA',
+    duration: '14 jours',
+    results: ['+15k vues', '+1k clics', '+150 leads'],
+    advantages: ['A/B test créa', 'Ciblage lookalike'],
+    objective: 'Conversions',
+  },
+  {
+    platform: 'TikTok',
+    logo: 'https://cdn.simpleicons.org/tiktok/ffffff',
+    name: 'Pack Viral',
+    price_DA: '25,000 DA',
+    duration: '10 jours',
+    results: ['+50k vues', '+2k interactions'],
+    advantages: ['Spark Ads', 'UGC conseillé'],
+    objective: 'Reach',
   },
 ];
 
 const Packs = () => {
-  const [packs, setPacks] = useState(DEFAULT_PACKS);
+  const [packs, setPacks] = useState(FALLBACK_PACKS);
 
   useEffect(() => {
     const fetchPacks = async () => {
@@ -27,7 +47,7 @@ const Packs = () => {
           if (Array.isArray(data) && data.length) setPacks(data);
         }
       } catch (e) {
-        // keep defaults
+        // keep fallbacks
       }
     };
     fetchPacks();
@@ -50,7 +70,7 @@ const Packs = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {packs.map((pack, idx) => (
             <motion.div
-              key={pack.id || idx}
+              key={pack.id || `${pack.name}-${idx}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
